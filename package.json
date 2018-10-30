@@ -1,0 +1,21 @@
+{
+  "name": "generator-rmx",
+  "version": "1.0.0",
+  "description": "React and MobX generator",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Andrew Scales",
+  "license": "COPYRIGHT",
+  "dependencies": {
+    "yeoman-generator": "^3.1.1"
+  },
+  "devDependencies": {
+    "ast-query": "^2.0.0",
+    "esprima": "^4.0.1",
+    "recast": "^0.16.0"
+  }
+}
