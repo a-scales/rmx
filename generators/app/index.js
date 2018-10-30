@@ -31,11 +31,14 @@ module.exports = class extends Generator {
         
     }
     writing() {
+        // Writing index.js to have mobx routing
         this.log("Attempting to overwirte index.js");
         this.fs.copyTpl(
             this.templatePath('main.js'),
             this.destinationPath('src/index.js')
         );
+        
+        // Writing movx stores and views
         this.log("Copying MobX store and views");
         this.fs.copyTpl(
             this.templatePath("Views.js"),
@@ -45,10 +48,16 @@ module.exports = class extends Generator {
             this.templatePath("Store.js"),
             this.destinationPath('src/Store/index.js')
         );
+        // Writing first page
         this.fs.copyTpl(
             this.templatePath("pages/Home.js"),
             this.destinationPath('src/Pages/Home.js')
         );
+        
+        // Reading package.json and adding support for decorators
+        let package = this.fs.readJSON(this.destinationPath("package.json"));
+        package['babel']['plugins'] = ["transform-decorators-legacy"];
+        this.fs.writeJSON(this.destinationPath("package.json"),package);
     }
     install() {
         this.npmInstall('babel-plugin-transform-decorators-legacy',{'save-dev': true});

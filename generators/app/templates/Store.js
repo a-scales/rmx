@@ -1,20 +1,21 @@
 import { RouterStore, startRouter} from 'mobx-router';
 import {Views} from '../Config/views'
 
-class Store {
+class RootStore {
 	constructor() {
-		this.store = {
-			app: {
-				title: 'New Project',
-				user: null
-			},
-			router: new RouterStore()
-		}
+		this.appStore = new AppStore(this)
 	}	
 	route() {
-		// console.log(startRouter);
 		return(startRouter);
 	}	
 }
 
-export default new Store(); 
+
+class AppStore {
+    constructor(rootStore) {
+        this.rootStore = rootStore;
+        this.router = new RouterStore();
+    }
+}
+
+export default new RootStore(); 
